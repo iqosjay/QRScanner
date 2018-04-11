@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">QRCodeScanner</string>
+    <string name="scan_text">扫一扫</string>
+    <string name="app_txt_scan_qr_code">扫描</string>
+    <string name="app_txt_build">生成</string>
+    <string name="app_txt_scanner_title">扫描二维码</string>
+    <string name="scan_tip">把二维码放入取景框中即可自动扫描</string>
+    <string name="app_permission_dialog_title">提示</string>
+    <string name="app_permission_dialog_message">缺少权限，无法继续执行操作，请前往“设置”中打开</string>
+    <string name="app_permission_dialog_btn">去设置</string>
+</resources>

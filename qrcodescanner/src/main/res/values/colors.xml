@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3D3840</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorScanRectCorner">#F5A623</color>
+    <color name="colorGreen">#00FF00</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="result_view">#B0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#C0FFFF00</color>
+    <color name="color_transparent">#00000000</color>
+</resources>
