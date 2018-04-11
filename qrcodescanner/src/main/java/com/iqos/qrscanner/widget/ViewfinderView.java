@@ -140,7 +140,7 @@ public final class ViewfinderView extends View {
         lineRect.bottom = slideTop + DEFAULT_SCAN_RES_RECT_WIDTH;
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), scanLineRes);
         if (null == bitmap) {
-            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qrcode_scan_line);
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qr_code_scan_line);
         }
         canvas.drawBitmap(bitmap, null, lineRect, mPaint);
         //----------------------------画扫描框下面的字---------------------------------//
