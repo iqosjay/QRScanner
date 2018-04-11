@@ -4,13 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true">
-
     <!--SurfaceView-->
     <SurfaceView
         android:id="@+id/preview_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <!--自定义扫码界面-->
     <com.iqos.qrscanner.widget.ViewfinderView
         android:id="@+id/viewfinder_view"
@@ -24,7 +22,6 @@
         app:scan_text_above_rect="false"
         app:scan_tip_text="@string/scan_tip"
         app:scan_tip_text_size="14sp" />
-
     <!--标题栏-->
     <include layout="@layout/app_layout_title" />
 </FrameLayout>

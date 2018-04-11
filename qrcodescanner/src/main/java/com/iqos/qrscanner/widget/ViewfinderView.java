@@ -19,7 +19,8 @@ import com.iqos.qrscanner.camera.CameraManager;
 
 
 /**
- * 二维码自定义扫描界面
+ * Created by 水银灯、 on 2018/04/11.
+ * 自定义二维码扫描界面
  */
 public final class ViewfinderView extends View {
     private static final long ANIMATION_DELAY = 1L;//刷新界面的时间
@@ -165,6 +166,4 @@ public final class ViewfinderView extends View {
     public void drawViewfinder() {
         invalidate();
     }
-
-
 }

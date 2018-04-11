@@ -44,7 +44,6 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     private boolean hasSurface;
     private boolean playBeep;
     private boolean vibrate;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
