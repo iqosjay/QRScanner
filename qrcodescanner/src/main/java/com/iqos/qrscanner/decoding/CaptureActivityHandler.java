@@ -106,7 +106,7 @@ public final class CaptureActivityHandler extends Handler implements ResultPoint
     /**
      * 重新启动预览和解码
      */
-    private void restartPreviewAndDecode() {
+    public void restartPreviewAndDecode() {
         if (state == State.SUCCESS) {
             state = State.PREVIEW;
             CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);

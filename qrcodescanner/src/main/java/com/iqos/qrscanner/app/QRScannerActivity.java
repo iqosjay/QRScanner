@@ -30,9 +30,10 @@ import java.util.Vector;
 
 
 public class QRScannerActivity extends Activity implements SurfaceHolder.Callback, View.OnClickListener {
+    private static final long VIBRATE_DURATION = 200L;
+    private static final float BEEP_VOLUME = 0.10f;
     public static final int SCAN_RESULT_CODE = 15613;
     public static final String SCAN_RESULT = "scan_result";
-    private static final float BEEP_VOLUME = 0.10f;
     private ViewfinderView mScanView;
     private CaptureActivityHandler handler;
     private Vector<BarcodeFormat> decodeFormats;
@@ -43,11 +44,13 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
     private ImageView mIvBack;
     private boolean hasSurface;
     private boolean playBeep;
+
     private boolean vibrate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qrscanner);
+        setContentView(getLayoutResources());
         this.setFitSystem();
         this.findViews();
         this.init();
@@ -65,6 +68,15 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
     }
 
     /**
+     * 获取布局文件
+     *
+     * @return XML里面的布局文件
+     */
+    protected int getLayoutResources() {
+        return R.layout.activity_qrscanner;
+    }
+
+    /**
      * 获取XML里面的控件
      */
     protected void findViews() {
@@ -72,6 +84,7 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
         mScanView = findViewById(R.id.viewfinder_view);
         mIvBack = findViewById(R.id.app_iv_back);
     }
+
 
     /**
      * 初始化
@@ -84,7 +97,6 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
     }
-
 
     @Override
     protected void onResume() {
@@ -127,11 +139,15 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
 
     /**
      * 处理扫描结果
+     *
+     * @param result 扫描的结果
      */
     public void handleDecode(Result result) {
-        if (null == result) return;
+        if (null == result) {
+            this.restartQRScanner();
+            return;
+        }
         inactivityTimer.onActivity();
-        playBeepSoundAndVibrate();
         String resultStr = result.getText();
         Intent intent = new Intent();
         intent.putExtra(SCAN_RESULT, resultStr);
@@ -196,9 +212,10 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
         }
     }
 
-    private static final long VIBRATE_DURATION = 200L;
-
-    private void playBeepSoundAndVibrate() {
+    /**
+     * 扫码成功后播放“滴”并且振动手机
+     */
+    protected final void playBeepSoundAndVibrate() {
         if (playBeep && mediaPlayer != null) {
             mediaPlayer.start();
         }
@@ -209,6 +226,16 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
             }
         }
     }
+
+    /**
+     * 连续扫描、调用此方法即可重新扫描
+     */
+    protected final void restartQRScanner() {
+        if (null != handler) {
+            handler.restartPreviewAndDecode();//重新启动预览和解码
+        }
+    }
+
 
     /**
      * When the beep has finished playing, rewind to queue up another one.
