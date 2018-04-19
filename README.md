@@ -1,11 +1,16 @@
 # QRScanner
 如同它的名字一样好理解
+
 这是一个扫描二维码的简单库
+
 方便那些不想麻烦的懒人使用
+
 当前版本是2.0
+
 扫码的速度非常快
 
 使用方法:
+
 首先
 
 在build.gradle(Project)文件中添加
@@ -28,6 +33,7 @@
     }
 
 如果你只是想使用这个功能
+
 那么只需要这样启动
 
     public void openScan() {
@@ -36,6 +42,7 @@
     }
 
 当你想要获取扫码的结果
+
 只需要重写onActivityResult()方法
 
     @Override
@@ -52,10 +59,13 @@
 这样你就能拿到扫码的结果(我这里只是Toast了一下)
 
 如果你觉得这个库的作者弄的界面太恶心了
+
 你也可以使用你自己的界面
+
 使用方法如下
 
 首先你新建一个Activity继承自QRScannerActivity
+
 然后把它的布局文件修改为这样
 
     <?xml version="1.0" encoding="utf-8"?>
@@ -90,21 +100,32 @@
     
  注意！！
  SurfaceView和ViewFinderView的id是不能变的一定要是上面写的那样
+ 
  标题栏也是必须include的
+ 
  否则会提示找不到控件导致闪退
+ 
  
 上面的属性意思：
  scan_line_move_speed：就是扫描的线移动的速度
+ 
  scan_line_res：扫描的线的图片资源
+ 
  scan_rect_corner_color：扫码框的四个角的颜色
+ 
  scan_rect_corner_length：挚友框的四个角的长度
+ 
  scan_rect_corner_width：挚友框的四个角的宽度
+ 
  scan_text_above_rect：提示文本是否处于扫描框之上
+ 
  scan_tip_text：扫描的提示文本
+ 
  scan_tip_text_size：扫描提示文本的文字大小
  
   
  这个布局文件你已经写好了
+ 
  现在重写Activity中的方法
  
     public class MyQrScannerActivity extends QRScannerActivity {
@@ -118,6 +139,7 @@
  把getLayoutResources()方法重写修改返回值为你刚才写的布局
  
  再启动一看
+ 
  界面就已经被修改过了~~
  
  那么扫描的结果怎么获取呢？
@@ -132,7 +154,9 @@
  这样就能拿到扫码结果之后写自己的逻辑
  
  其它：
+ 
  1、如果想要扫描成功之后继续扫描
+ 
  只需要在需要继续扫描的调用
  
     super.restartQRScanner();
@@ -140,6 +164,7 @@
  即可继续扫描
  
  2、如果需要在扫描成功之后振动手机和播放声音
+ 
  只需要在解码成功的方法那里调用
  
     super.playBeepSoundAndVibrate();
@@ -155,9 +180,11 @@
 这样就有了振动和声音
 
 其它的功能大家如果需要或者是说遇到任何Bug
+
 欢迎发送建议到我的邮箱
 
     iqosjay@gmail.com
     
 感谢能看到这里的你~~
+
 ありがとううううう
