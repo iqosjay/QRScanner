@@ -1,5 +1,6 @@
 package com.iqos.qrscanner.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
@@ -7,7 +8,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 
-public class QRScannerActivity extends AppCompatActivity implements SurfaceHolder.Callback, View.OnClickListener {
+public class QRScannerActivity extends Activity implements SurfaceHolder.Callback, View.OnClickListener {
     public static final int SCAN_RESULT_CODE = 15613;
     public static final String SCAN_RESULT = "scan_result";
     private static final float BEEP_VOLUME = 0.10f;
