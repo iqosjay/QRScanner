@@ -114,9 +114,9 @@
  
  app:scan_rect_corner_color：扫码框的四个角的颜色
  
- app:scan_rect_corner_length：挚友框的四个角的长度
+ app:scan_rect_corner_length：扫码框的四个角的长度
  
- app:scan_rect_corner_width：挚友框的四个角的宽度
+ app:scan_rect_corner_width：扫码框的四个角的宽度
  
  app:scan_text_above_rect：提示文本是否处于扫描框之上
  
@@ -124,7 +124,11 @@
  
  app:scan_tip_text_size：扫描提示文本的文字大小
  
-  
+ 
+ 扫码框的大小不能修改！
+ 
+ 长和宽都固定为屏幕宽度的2/3
+ 
  这个布局文件你已经写好了
  
  现在重写Activity中的方法
