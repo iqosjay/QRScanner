@@ -107,21 +107,22 @@
  
  
 上面的属性意思：
- scan_line_move_speed：就是扫描的线移动的速度
+
+ app:scan_line_move_speed：就是扫描的线移动的速度
  
- scan_line_res：扫描的线的图片资源
+ app:scan_line_res：扫描的线的图片资源
  
- scan_rect_corner_color：扫码框的四个角的颜色
+ app:scan_rect_corner_color：扫码框的四个角的颜色
  
- scan_rect_corner_length：挚友框的四个角的长度
+ app:scan_rect_corner_length：挚友框的四个角的长度
  
- scan_rect_corner_width：挚友框的四个角的宽度
+ app:scan_rect_corner_width：挚友框的四个角的宽度
  
- scan_text_above_rect：提示文本是否处于扫描框之上
+ app:scan_text_above_rect：提示文本是否处于扫描框之上
  
- scan_tip_text：扫描的提示文本
+ app:scan_tip_text：扫描的提示文本
  
- scan_tip_text_size：扫描提示文本的文字大小
+ app:scan_tip_text_size：扫描提示文本的文字大小
  
   
  这个布局文件你已经写好了
