@@ -9,6 +9,10 @@
 
 扫码的速度非常快
 
+支持自定义界面
+
+支持连续扫描
+
 使用方法:
 
 首先
@@ -143,9 +147,20 @@
     
  把getLayoutResources()方法重写修改返回值为你刚才写的布局
  
- 再启动一看
+ 这个时候启动就不能启动QRScannerActivity了
  
- 界面就已经被修改过了~~
+ 而要启动你刚才写的那个子类
+ 
+ 比如这里写的子类是MyQrScannerActivity
+ 
+ 所以我启动就是
+ 
+    public void openScan() {
+        Intent intent = new Intent(this, MyQrScannerActivity.class);
+        startActivity(intent);
+    }
+ 
+ 这样启动之后就是你自己写的界面了~
  
  那么扫描的结果怎么获取呢？
  
@@ -155,7 +170,7 @@
     public void handleDecode(Result result) {
         Toast.makeText(this, result.getText(), Toast.LENGTH_SHORT).show();
     }
-
+    
  这样就能拿到扫码结果之后写自己的逻辑
  
  其它：
