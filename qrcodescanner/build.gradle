@@ -18,5 +18,6 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.google.zxing:core:3.3.0'
 }

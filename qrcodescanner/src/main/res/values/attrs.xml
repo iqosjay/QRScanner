@@ -11,5 +11,7 @@
         <attr name="scan_tip_text_size" format="dimension" /><!--扫码界面的文本字体大小-->
         <attr name="scan_text_above_rect" format="boolean" /><!--扫码界面的文本是否处于扫码框的上面-->
         <attr name="scan_text_padding_rect" format="dimension" /><!--扫码框与文本的距离-->
+        <attr name="scan_view_title_text" format="string" /><!--扫码界面的标题-->
+        <attr name="scan_rect_padding_top" format="string" /><!--扫码界面的标题-->
     </declare-styleable>
 </resources>

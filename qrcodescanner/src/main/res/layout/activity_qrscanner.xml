@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true">
@@ -14,14 +15,23 @@
         android:id="@+id/viewfinder_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:scan_line_color="#00FF00"
         app:scan_line_move_speed="3"
-        app:scan_line_res="@drawable/qr_code_scan_line"
-        app:scan_rect_corner_color="#F5A623"
+        app:scan_rect_corner_color="#00FF00"
         app:scan_rect_corner_length="20dp"
         app:scan_rect_corner_width="3dp"
         app:scan_text_above_rect="false"
-        app:scan_tip_text="@string/scan_tip"
-        app:scan_tip_text_size="14sp" />
-    <!--标题栏-->
-    <include layout="@layout/app_layout_title" />
-</FrameLayout>
+        app:scan_tip_text="把二维码放入取景框即可自动扫描"
+        app:scan_tip_text_size="14sp"
+        app:scan_view_title_text="扫描二维码" />
+    <!--Toolbar-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/app_scan_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="扫描二维码"
+        app:titleTextColor="@android:color/white" />
+
+</RelativeLayout>

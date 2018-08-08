@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.iqos.qrscanner.R;
 import com.iqos.qrscanner.camera.CameraManager;
+import com.iqos.qrscanner.utils.BitmapUtil;
 
 
 /**
@@ -35,6 +36,7 @@ public final class ViewfinderView extends View {
     private boolean tipAboveRect;//文本在上？
     private boolean isFirst;
     private int tipTextSize;//扫码文本字体大小
+    private int scanLineColor;//扫描的线的颜色
     private int cornerColor;//角的颜色
     private int cornerWidth;//角的宽度
     private int cornerLength;//角的长
@@ -42,6 +44,7 @@ public final class ViewfinderView extends View {
     private int scanLineRes;//扫描线的资源id
     private int lineMoveSpeed;//扫描线移动速度
     private String tipText;//显示文本
+    private String scanViewTitle;//扫码界面的Title
     private Context context;
 
     /**
@@ -82,15 +85,22 @@ public final class ViewfinderView extends View {
         //----------------------------------角的颜色---------------------------------------------
         cornerColor = td.getColor(R.styleable.ViewfinderView_scan_rect_corner_color, Color.GREEN);
 
+        //----------------------------------扫描的线的颜色---------------------------------------------
+        scanLineColor = td.getColor(R.styleable.ViewfinderView_scan_rect_corner_color, Color.GREEN);
+
         //----------------------------------角宽-----------------------------------------------
         cornerWidth = td.getDimensionPixelOffset(R.styleable.ViewfinderView_scan_rect_corner_width, DEFAULT_CORNER_WIDTH);
 
         //----------------------------------扫描线---------------------------------------------
         scanLineRes = td.getResourceId(R.styleable.ViewfinderView_scan_line_res, -1);
 
+        //----------------------------------扫描界面的Title---------------------------------------------
+        scanViewTitle = td.getString(R.styleable.ViewfinderView_scan_view_title_text);
+
         //----------------------------------扫描线移动速度--------------------------------------
         lineMoveSpeed = td.getInteger(R.styleable.ViewfinderView_scan_line_move_speed, DEFAULT_MOVE_SPEED);
         lineMoveSpeed = lineMoveSpeed > DEFAULT_MOVE_SPEED ? DEFAULT_MOVE_SPEED : lineMoveSpeed;
+
         td.recycle();
     }
 
@@ -142,6 +152,7 @@ public final class ViewfinderView extends View {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), scanLineRes);
         if (null == bitmap) {
             bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qr_code_scan_line);
+            bitmap = BitmapUtil.tintBitmap(bitmap, scanLineColor);
         }
         canvas.drawBitmap(bitmap, null, lineRect, mPaint);
         //----------------------------画扫描框下面的字---------------------------------//
@@ -161,6 +172,15 @@ public final class ViewfinderView extends View {
         }
         //只刷新扫描框的内容，其他地方不刷新
         postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
+    }
+
+    /**
+     * 获取扫码界面要显示的Title
+     *
+     * @return 标题文本
+     */
+    public String getScanViewTitle() {
+        return TextUtils.isEmpty(scanViewTitle) ? "扫描二维码" : scanViewTitle;
     }
 
     public void drawViewfinder() {

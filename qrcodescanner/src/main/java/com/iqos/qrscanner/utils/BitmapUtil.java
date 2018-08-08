@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
@@ -51,6 +54,24 @@ public class BitmapUtil {
             return null;
         }
     }
+
+    /**
+     * modify the bitmap's color.
+     *
+     * @param inBitmap  old bitmap.
+     * @param tintColor the color what you would like modify.
+     * @return bitmap after modified the color
+     */
+    public static Bitmap tintBitmap(Bitmap inBitmap, int tintColor) {
+        if (inBitmap == null) return null;
+        Bitmap outBitmap = Bitmap.createBitmap(inBitmap.getWidth(), inBitmap.getHeight(), inBitmap.getConfig());
+        Canvas canvas = new Canvas(outBitmap);
+        Paint paint = new Paint();
+        paint.setColorFilter(new PorterDuffColorFilter(tintColor, PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(inBitmap, 0, 0, paint);
+        return outBitmap;
+    }
+
 
     /**
      * drawable to bitmap

@@ -1,6 +1,5 @@
 package com.iqos.qrscanner.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
@@ -8,14 +7,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 
-public class QRScannerActivity extends Activity implements SurfaceHolder.Callback, View.OnClickListener {
+public class QRScannerActivity extends AppCompatActivity implements SurfaceHolder.Callback {
     private static final long VIBRATE_DURATION = 200L;
     private static final float BEEP_VOLUME = 0.10f;
     public static final int SCAN_RESULT_CODE = 15613;
@@ -37,14 +37,12 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
     private ViewfinderView mScanView;
     private CaptureActivityHandler handler;
     private Vector<BarcodeFormat> decodeFormats;
+    private Toolbar mToolbar;
     private String characterSet;
     private InactivityTimer inactivityTimer;
     private MediaPlayer mediaPlayer;
-    private TextView mTvTitle;
-    private ImageView mIvBack;
     private boolean hasSurface;
     private boolean playBeep;
-
     private boolean vibrate;
 
     @Override
@@ -80,9 +78,8 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
      * 获取XML里面的控件
      */
     protected void findViews() {
-        mTvTitle = findViewById(R.id.app_tv_title);
-        mScanView = findViewById(R.id.viewfinder_view);
-        mIvBack = findViewById(R.id.app_iv_back);
+        this.mScanView = findViewById(R.id.viewfinder_view);
+        this.mToolbar = findViewById(R.id.app_scan_tool_bar);
     }
 
 
@@ -90,12 +87,22 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
      * 初始化
      */
     protected void init() {
-        mTvTitle.setText(R.string.app_txt_scanner_title);
-        mIvBack.setOnClickListener(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         CameraManager.init(getApplication());
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
+        setSupportActionBar(mToolbar);
+        ActionBar supportActionBar = getSupportActionBar();
+        if (null != supportActionBar) {
+            supportActionBar.setHomeButtonEnabled(true);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
     }
 
     @Override
@@ -143,10 +150,6 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
      * @param result 扫描的结果
      */
     public void handleDecode(Result result) {
-        if (null == result) {
-            this.restartQRScanner();
-            return;
-        }
         inactivityTimer.onActivity();
         String resultStr = result.getText();
         Intent intent = new Intent();
@@ -246,17 +249,4 @@ public class QRScannerActivity extends Activity implements SurfaceHolder.Callbac
         }
     };
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (R.id.app_iv_back == id) {
-            //返回
-            finish();
-        }
-    }
 }
