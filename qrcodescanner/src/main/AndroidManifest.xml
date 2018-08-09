@@ -13,6 +13,6 @@
             android:name=".app.QRScannerActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 </manifest>
