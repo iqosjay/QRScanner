@@ -23,7 +23,7 @@
         app:scan_text_above_rect="false"
         app:scan_tip_text="把二维码放入取景框即可自动扫描"
         app:scan_tip_text_size="14sp"
-        app:scan_view_title_text="扫描二维码" />
+        app:scan_view_title_text="呵呵呵呵" />
     <!--Toolbar-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/app_scan_tool_bar"
