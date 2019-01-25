@@ -30,6 +30,6 @@
   <item type="id" name="search_book_contents_succeeded"/>
   <item type="id" name="grid_view" />
   <item type="id" name="web_view" />
-  <item type="id" name="about_version_code">false</item>
-  <item type="id" name="split">false</item>
+  <item type="id" name="about_version_code"/>
+  <item type="id" name="split"/>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true">
@@ -24,14 +23,4 @@
         app:scan_tip_text="把二维码放入取景框即可自动扫描"
         app:scan_tip_text_size="14sp"
         app:scan_view_title_text="呵呵呵呵" />
-    <!--Toolbar-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/app_scan_tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="扫描二维码"
-        app:titleTextColor="@android:color/white" />
-
 </RelativeLayout>

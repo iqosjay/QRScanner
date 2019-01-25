@@ -17,7 +17,7 @@
 package com.iqos.qrscanner.camera;
 
 import android.content.Context;
-import android.graphics.PixelFormat;
+import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
@@ -79,9 +79,8 @@ public final class CameraManager {
         // the more efficient one shot callback, as the older one can swamp the system and cause it
         // to run out of memory. We can't use SDK_INT because it was introduced in the Donut SDK.
         //useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > Build.VERSION_CODES.CUPCAKE;
-        useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > 3; // 3 = Cupcake
-
-        previewCallback = new PreviewCallback(configManager, useOneShotPreviewCallback);
+        useOneShotPreviewCallback = true; // 3 = Cupcake
+        previewCallback = new PreviewCallback(configManager, true);
         autoFocusCallback = new AutoFocusCallback();
     }
 
@@ -192,8 +191,8 @@ public final class CameraManager {
             if (null == camera) return null;
             int width = screenResolution.x * 2 / 3;
             int height = screenResolution.x * 2 / 3;
-            int leftOffset = (screenResolution.x - width) / 2;
-            int topOffset = (screenResolution.y - height) / 2;
+            int leftOffset = (screenResolution.x - width) >> 1;
+            int topOffset = (screenResolution.y - height) >> 2;
             framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
         }
         return framingRect;
@@ -259,10 +258,10 @@ public final class CameraManager {
         switch (previewFormat) {
             // This is the standard Android format which all devices are REQUIRED to support.
             // In theory, it's the only one we should ever care about.
-            case PixelFormat.YCbCr_420_SP:
+            case ImageFormat.NV21:
                 // This format has never been seen in the wild, but is compatible as we only care
                 // about the Y channel, so allow it.
-            case PixelFormat.YCbCr_422_SP:
+            case ImageFormat.NV16:
                 return new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top, rect.width(), rect.height());
             default:
                 // The Samsung Moment incorrectly uses this variant instead of the 'sp' version.

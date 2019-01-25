@@ -112,7 +112,6 @@ public final class ViewfinderView extends View {
     @SuppressLint("DrawAllocation")
     @Override
     public void onDraw(Canvas canvas) {
-        //中间的扫描框，你要修改扫描框的大小，去CameraManager里面修改
         Rect frame = CameraManager.get().getFramingRect();
         if (frame == null) return;
         //初始化中间线滑动的最上边和最下边
@@ -121,15 +120,17 @@ public final class ViewfinderView extends View {
             slideTop = frame.top;
         }
         //获取屏幕的宽和高
-        int width = canvas.getWidth();
-        int height = canvas.getHeight();
+        int width = getWidth();
+        int height = getHeight();
         //画出扫描框外面的阴影部分，共四个部分，扫描框的上面到屏幕上面，扫描框的下面到屏幕下面
         //扫描框的左边面到屏幕左边，扫描框的右边到屏幕右边
+        mPaint.setAlpha(0x40);
         canvas.drawRect(0, 0, width, frame.top, mPaint);
         canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, mPaint);
         canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, mPaint);
         canvas.drawRect(0, frame.bottom + 1, width, height, mPaint);
         //画扫描框边上的角，总共8个部分
+        mPaint.setAlpha(0xff);
         mPaint.setColor(cornerColor);
         canvas.drawRect(frame.left, frame.top, frame.left + cornerLength, frame.top + cornerWidth, mPaint);
         canvas.drawRect(frame.left, frame.top, frame.left + cornerWidth, frame.top + cornerLength, mPaint);
@@ -159,15 +160,16 @@ public final class ViewfinderView extends View {
         mPaint.setColor(Color.WHITE);
         mPaint.setTextSize(tipTextSize);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setAlpha(0x60);
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTypeface(Typeface.create(ViewfinderView.class.getSimpleName(), Typeface.BOLD));
         if (!TextUtils.isEmpty(tipText)) {
             if (tipAboveRect) {
-                canvas.drawText(tipText, getMeasuredWidth() / 2, frame.top - textPaddingRect, mPaint);
+                canvas.drawText(tipText, getWidth() >> 1, frame.top - textPaddingRect, mPaint);
             } else {
                 Rect rect = new Rect();
                 mPaint.getTextBounds(tipText, 0, tipText.length(), rect);
-                canvas.drawText(tipText, getMeasuredWidth() / 2, frame.bottom + rect.height() + textPaddingRect, mPaint);
+                canvas.drawText(tipText, getWidth() >> 1, frame.bottom + rect.height() + textPaddingRect, mPaint);
             }
         }
         //只刷新扫描框的内容，其他地方不刷新
